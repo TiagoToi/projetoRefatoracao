@@ -1,19 +1,17 @@
 from datetime import datetime
 from typing import List
-from abc import ABC, abstractmethod
+
 from models.order import Order
 from models.order_item import OrderItem
 from models.customer import Customer
-from repositories.order_repository import IOrderRepository
-from strategies.discount_strategy import DiscountStrategy, SpecialPricingStrategyNoVip
-from services.notification_service import INotificationService
+from interfaces.iorder_repository import IOrderRepository
+from interfaces.istock_validator import IStockValidator
+from interfaces.discount_strategy import DiscountStrategy
+from strategies.discount_strategy import SpecialPricingStrategyNoVip
+from interfaces.inotification_service import INotificationService
 
 
 # ============================ ESTOQUE (VALIDADOR) ============================
-class IStockValidator(ABC):
-    @abstractmethod
-    def validate_items(self, items: List[OrderItem]) -> bool:
-        ...
 
 
 class BasicStockValidator(IStockValidator):

@@ -1,10 +1,9 @@
-from abc import ABC, abstractmethod
+
 from models.order import Order
+from interfaces.inotifier import INotifier
+from interfaces.inotification_service import INotificationService
 
 
-class INotifier(ABC):
-    @abstractmethod
-    def send(self, client_name: str, message: str) -> None: ...
 
 
 class EmailNotifier(INotifier):
@@ -17,11 +16,6 @@ class SMSNotifier(INotifier):
         print(f'SMS enviado para {client_name}: {message}')
 
 
-class INotificationService(ABC):
-    @abstractmethod
-    def notify_new_order(self, client_name: str, special: bool = False) -> None: ...
-    @abstractmethod
-    def notify_status_change(self, order: Order, new_status: str) -> None: ...
 
 
 class NotificationService(INotificationService):
